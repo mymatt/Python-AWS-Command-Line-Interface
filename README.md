@@ -39,16 +39,12 @@ Sync bucket
 python3 s3.py --sync-bucket path bucket
 ```
 
-
-
-
-
 --load-policy
 
 
 
 
-
+TODO
 --download-object
 
 --delete-bucket
