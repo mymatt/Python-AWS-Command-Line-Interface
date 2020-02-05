@@ -25,3 +25,12 @@ def cli(profile):
 def create_bucket(bucket):
     """Create bucket."""
     bucket_admin.setup_bucket(bucket)
+
+
+@cli.command('upload-object')
+@click.argument('bucket')
+@click.argument('object')
+@click.argument('key')
+def upload_object(bucket, object, key):
+    """Upload Object to bucket."""
+    bucket_admin.create_object(bucket, object, key)
