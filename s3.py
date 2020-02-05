@@ -49,3 +49,22 @@ def list_bucket_objects(bucket):
     """List objects in bucket."""
     for obj in bucket_admin.objects_all(bucket):
         print(obj)
+
+
+@cli.command('list-buckets')
+def list_buckets():
+    """List all s3 buckets."""
+    for bucket in bucket_admin.buckets_all():
+        print(bucket)
+
+
+@cli.command('sync-bucket')
+@click.argument('path', type=click.Path(exists=True))
+@click.argument('bucket')
+def sync_bucket(path, bucket):
+    """Sync Directory with bucket."""
+    bucket_admin.sync(path, bucket)
+
+
+if __name__ == '__main__':
+    cli()
