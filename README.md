@@ -1,7 +1,7 @@
 
 ## Python Command Line Interface using Boto3, Click
 
-#Set AWS Profile
+###Set AWS Profile
 
 1) Enter Profile on CLI
 ```
@@ -12,7 +12,7 @@ python3 s3.py --profile profilename
 @click.option('--profile', default='add_default_profile_name_here', help='AWS Profile')
 ```
 
-#Options Available:
+###Options Available:
 
 List buckets              
 ```
