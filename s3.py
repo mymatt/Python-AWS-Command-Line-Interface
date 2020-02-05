@@ -34,3 +34,18 @@ def create_bucket(bucket):
 def upload_object(bucket, object, key):
     """Upload Object to bucket."""
     bucket_admin.create_object(bucket, object, key)
+
+
+@cli.command('load-policy')
+@click.argument('bucket')
+def load_policy(bucket):
+    """Load Policy to bucket."""
+    bucket_admin.set_policy(bucket)
+
+
+@cli.command('list-bucket-objects')
+@click.argument('bucket')
+def list_bucket_objects(bucket):
+    """List objects in bucket."""
+    for obj in bucket_admin.objects_all(bucket):
+        print(obj)
