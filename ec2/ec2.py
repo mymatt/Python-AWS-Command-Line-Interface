@@ -1,7 +1,10 @@
 #!/usr/bin/python
 
+# list ec2 instances in current region
 # stop ec2 instances
 # start ec2 instances
+# add tags
+# restrict access via tag
 # release unattached elastic IPs
 
 import boto3
@@ -23,12 +26,14 @@ def cli(profile):
 
 
 @cli.command('stop-instances')
+@click.option('--tag', default='', help='Tag Group of EC2 Instance')
 def stop_instances():
     """Stop running ec2 Instances of current region"""
-    ec2_manager.stop_instances()
+    ec2_manager.stop_instances(tag)
 
 
 @cli.command('start-instances')
+@click.option('--tag', default='', help='Tag Group of EC2 Instance')
 def start_instances():
     """Start ec2 Instances of current region"""
-    ec2_manager.start_instances()
+    ec2_manager.start_instances(tag)
