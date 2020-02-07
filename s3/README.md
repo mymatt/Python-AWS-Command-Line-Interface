@@ -1,5 +1,5 @@
 
-## Python Command Line Interface using Boto3, Click
+## Python S3 Command Line Interface using Boto3, Click
 
 ### Set AWS Profile
 
@@ -16,35 +16,36 @@ python3 s3.py --profile profilename
 
 List buckets              
 ```
-python3 s3.py --list-buckets
+python3 s3.py list-buckets
 ```
 
 List bucket contents              
 ```
-python3 s3.py --list-bucket-objects bucket
+python3 s3.py list-bucket-objects bucket
 ```
 
 Create bucket
 ```
-python3 s3.py --create-bucket bucket
+python3 s3.py create-bucket bucket
 ```
 
 Upload object
 ```
-python3 s3.py --upload-object bucket object key
+python3 s3.py upload-object bucket object key
 ```
 
 Sync bucket
 ```
-python3 s3.py --sync-bucket path bucket
+python3 s3.py sync-bucket path bucket
 ```
-
---load-policy
 
 
 
 
 TODO
+
+--load-policy
+
 --download-object
 
 --delete-bucket
