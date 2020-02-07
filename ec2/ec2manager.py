@@ -8,23 +8,34 @@ class ec2Manager:
         self.ec2 = session.resource('ec2')
 
 
-    def list_instances(self):
-        pass
-        # list by name, tag:Name, uptime, instance-id
+    def list_instances(self, tagKey, tagValue):
+        paginator = self.ec2.meta.client.get_paginator('describe_instances')
+        response = paginator.paginate(Filters=[
+                {
+                    'Name': 'tag:'+TagKey', 'Values': [tagValue]
+                }
+            ]
+        )
+        for reservation in response.get("Reservations"):
+            for instance in reservation.get("Instances"):
+                print("Instance ID: {0}".format(instance.id))
+        # list by name, tag:Name, uptime, instance-id, state
 
 
     @staticmethod
     def filterEC2(tagValue, current_state):
-        tagName = "tag:Group"
+        tagName = "Group"
 
-        ec2Filters = [{
-            'Name': 'instance-state-name',
-            'Values': [current_state]
-        }]
+        ec2Filters = [
+            {
+                'Name': 'instance-state-name',
+                'Values': [current_state]
+            }
+        ]
 
         if tagValue:
             itemF = {
-                'Name': tagName,
+                'Name': 'tag:'+tagName,
                 'Values': [tagValue]
                 }
             ec2Filters.append(itemF)
@@ -65,7 +76,9 @@ class ec2Manager:
         #  find instances with backup = true
         instances = self.ec2.instances.filter(
             Filters=[
-                {'Name': 'tag:Backup', 'Values': ['true']}
+                {
+                    'Name': 'tag:Backup', 'Values': ['true']
+                }
             ]
         )
 
@@ -106,7 +119,9 @@ class ec2Manager:
         # remove backup after n days and images > m
         snapshots = self.ec2.snapshots.filter(
                   Filters=[
-                      {'Name': 'tag:Remove', 'Values': ['true']}
+                      {
+                        'Name': 'tag:Remove', 'Values': ['true']
+                      }
                   ]
               )
 

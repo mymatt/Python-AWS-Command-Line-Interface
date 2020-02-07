@@ -28,17 +28,23 @@ def cli(profile):
     session = boto3.Session(profile_name=profile)
     ec2_manager = ec2Manager(session)
 
+@cli.command('list-instances')
+@click.argument('TagKey')
+@click.argument('TagValue')
+def list_instances(TagKey, TagValue):
+    """List ec2 Instances by tag"""
+    ec2_manager.list_instances(TagKey, TagValue)
 
 @cli.command('stop-instances')
 @click.option('--tag', default='', help='Tag Group of EC2 Instance')
-def stop_instances():
+def stop_instances(tag):
     """Stop running ec2 Instances of current region"""
     ec2_manager.stop_instances(tag)
 
 
 @cli.command('start-instances')
 @click.option('--tag', default='', help='Tag Group of EC2 Instance')
-def start_instances():
+def start_instances(tag):
     """Start ec2 Instances of current region"""
     ec2_manager.start_instances(tag)
 
