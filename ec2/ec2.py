@@ -7,6 +7,10 @@
 # restrict access via tag
 # release unattached elastic IPs
 
+# backup image, add tag remove:false
+# remove image based on remove:true
+# cron job
+
 import boto3
 import click
 
@@ -37,3 +41,15 @@ def stop_instances():
 def start_instances():
     """Start ec2 Instances of current region"""
     ec2_manager.start_instances(tag)
+
+
+@cli.command('backup-instances')
+def backup_instances():
+    """Backup Instances with Tag:Backup"""
+    ec2_manager.backup_instances()
+
+
+@cli.command('cleanup-backups')
+def cleanup_backups():
+    """Delete Expired Backup Instances"""
+    ec2_manager.cleanup_backups()
